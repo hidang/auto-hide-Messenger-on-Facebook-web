@@ -1,0 +1,21 @@
+{
+  "name": "Hide Message fb",
+  "version": "1.0",
+  "description": "By hidang",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+  {
+    "matches": ["*://*/*"],
+    "js": ["./controllers/show_hide.js", "./controllers/addEventMouse.js"]
+  }
+  ],
+  "permissions": ["activeTab","declarativeContent", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "manifest_version": 2
+}
