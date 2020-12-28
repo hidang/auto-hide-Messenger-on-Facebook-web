@@ -26,3 +26,4 @@ elements
 // mouseenter	Sự kiện xẩy ra khi con trỏ (pointer) di chuyển vào một phần tử.
 // mouseleave	Sự kiện xẩy ra khi con trỏ (pointer) di chuyển ra khỏi một phần tử.
 //"*://*/*" : match all website
+//https://stackoverflow.com/questions/45630750/issues-executescript-permission/45634353

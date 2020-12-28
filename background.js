@@ -6,7 +6,7 @@ chrome.runtime.onConnect.addListener(function(port) {
       chrome.storage.local.set({
         "thaotac": ''
       }, function() {
-        console.log("Settings saved");
+        //console.log("Settings saved");
       });
       chrome.tabs.executeScript(null, {file: './controllers/show_hide.js'});
     }

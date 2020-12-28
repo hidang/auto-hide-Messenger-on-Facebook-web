@@ -18,7 +18,8 @@ function Add() {
   for (let element of elements) {
     element.addEventListener('mouseenter', e => {
       //console.log(element)
-      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]').textContent;
+      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]');
+      ChatTab = ChatTab.getAttribute('class')
       console.log(ChatTab);
       port.postMessage({thaotac: "show"});//
       // port.onMessage.addListener(function(msg) {
