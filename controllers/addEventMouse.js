@@ -12,25 +12,25 @@ window.setInterval(function(){ // Set interval for checking
   console.log(elements.length);
 }, 500);
 //-------------------------------------------------------------------------
-var port = chrome.runtime.connect({name: "user_addEventMouse"});
+var port = chrome.runtime.connect();
 function Add() {
   var elements = document.querySelectorAll('[data-pagelet="ChatTab"]');
-  for (let element of elements) {
-    element.addEventListener('mouseenter', e => {
-      //console.log(element)
-      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]');
-      ChatTab = ChatTab.getAttribute('class')
-      console.log(ChatTab);
-      port.postMessage({thaotac: "show"});//
-      // port.onMessage.addListener(function(msg) {
-      // });
+  //localStorage.setItem('ChatTab', 'dang dep trai');
+
+  elements.forEach(element => {
+    var ChatTab = element.querySelectorAll('[data-testid="messenger-chat-title-text"]');
+    port.postMessage({thaotac: "show"});
+    element.addEventListener('mouseenter', () => {
+      //console.log(element)=
+      // ChatTab = element.querySelectorAll('[data-testid="messenger-chat-title-text"]');
+      // console.log(ChatTab[0].textContent);//FIXME: trường hợp 2 tên giống nhau
+      port.postMessage({thaotac: "show"});
     });
-    element.addEventListener('mouseleave', e => {
-      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]');
-      port.postMessage({thaotac: "hide"});//
-      // port.onMessage.addListener(function(msg) {
-      // });
+    element.addEventListener('mouseleave', () => {
+      // ChatTab = element.querySelectorAll('[data-testid="messenger-chat-title-text"]');
+      // console.log(ChatTab[0].textContent);
+      port.postMessage({thaotac: "hide"});
     });
-  }
+  });
 }
 
