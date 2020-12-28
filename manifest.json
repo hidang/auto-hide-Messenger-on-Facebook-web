@@ -1,20 +1,19 @@
 {
   "name": "Hide Message fb",
   "version": "1.0",
-  "description": "By hidang",
+  "description": "hidang",
   "browser_action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
   {
-    "matches": ["*://*/*"],
-    "js": ["./controllers/show_hide.js", "./controllers/addEventMouse.js"]
+    "matches": ["https://*.facebook.com/*"],
+    "js": ["./controllers/show_hide.js", "./controllers/addEventMouse.js", "./controllers/checkChatTabInterval.js" ]
   }
   ],
-  "permissions": ["activeTab","declarativeContent", "storage"],
+  "permissions": ["tabs", "activeTab","declarativeContent", "storage", "https://*.facebook.com/*"],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   },
 
   "manifest_version": 2
