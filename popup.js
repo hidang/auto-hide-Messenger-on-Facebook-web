@@ -1,4 +1,4 @@
-chrome.tabs.executeScript(null, {file: './controllers/addEventMouse.js'});
+//chrome.tabs.executeScript(null, {file: './controllers/addEventMouse.js'});
 
 var port = chrome.runtime.connect({name: "user_addEventMouse"});
 var listChat = document.getElementById("listChat");

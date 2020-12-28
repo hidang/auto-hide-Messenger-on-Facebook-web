@@ -1,8 +1,3 @@
-
-chrome.runtime.onInstalled.addListener(function() {
-  
-});
-
 chrome.runtime.onConnect.addListener(function(port) {
   //console.assert(port.name == "user_addEventMouse");
   port.onMessage.addListener(function(msg) { 
