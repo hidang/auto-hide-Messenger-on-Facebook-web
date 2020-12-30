@@ -1,4 +1,5 @@
 console.log('background.js')
+//vì ở môi trường riêng biệt với các scripts trong controllers nên phải dùng mesage để nhận event-data
 chrome.runtime.onConnect.addListener(function(port) {
   //console.assert(port.name == "user_addEventMouse");
   port.onMessage.addListener(function(msg) { 
@@ -22,8 +23,10 @@ chrome.runtime.onConnect.addListener(function(port) {
         });
         break;
       }
-      
       default: break;
+    }
+    if(msg.ChatTabName){
+      localStorage.setItem('ChatTabName', msg.ChatTabName);
     }
   });
 });

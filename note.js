@@ -1,3 +1,6 @@
+//background.js và popup.js ở cùng một nơi(gọi là gì ta?) nên truy xuất qua lại localStorage
+//./controllers/* : ở môi trường tab facebook nên có thể DOM vào các phần tử trên trang web
+//--------------------------------------------------
 var elements = document.querySelectorAll('[data-scope="messages_table"]');//sender
 for (let element of elements) {
   element.style.display = "none";//block
