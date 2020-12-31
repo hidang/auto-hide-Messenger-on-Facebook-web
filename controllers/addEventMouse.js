@@ -1,36 +1,53 @@
 console.log('addEventMouse.js');
-Add();
-//TODO: check chattab
-var elements;
-var temp = 0;
-window.setInterval(function(){ // Set interval for checking
-  elements = document.querySelectorAll('[data-pagelet="ChatTab"]');
-  if (elements.length != temp) {
-    temp = elements.length;
-    Add();
+const port = chrome.runtime.connect();
+var ChatTabs, I_ChatTabs, Chat_Tabs, I_Chat_Tabs, array_ChatTabName = [];
+var arrayChatTabName = [];
+//---------------------------------------------------------------------------------------
+window.setInterval(function(){ // Set interval for checking 😑😐
+  I_ChatTabs = document.querySelectorAll('[data-testid="messenger-chat-title-text"]');
+  I_ChatTabs = [...I_ChatTabs];
+  if (I_ChatTabs.length === 0) {
+    return;
   }
-  console.log(elements.length);
+  I_Chat_Tabs = JSON.parse(localStorage.getItem('Chat_Tabs'));
+  if (I_Chat_Tabs === "[]" || I_Chat_Tabs === null) {
+    console.log('dayne')
+    Add();
+    return;
+  }
+  arrayChatTabName = [];
+  I_ChatTabs.forEach(element => {
+    arrayChatTabName.push(element.textContent);
+  });
+  arrayChatTabName.forEach(element => {
+    //console.log(I_Chat_Tabs)
+    if (!I_Chat_Tabs.includes(element)) {
+      Add();
+    }
+  });
 }, 500);
-//-------------------------------------------------------------------------
-var port = chrome.runtime.connect({name: "user_addEventMouse"});
+//----------------------------------------------------------------------------------------
+
 function Add() {
-  var elements = document.querySelectorAll('[data-pagelet="ChatTab"]');
-  for (let element of elements) {
-    element.addEventListener('mouseenter', e => {
-      //console.log(element)
-      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]');
-      ChatTab = ChatTab.getAttribute('class')
-      console.log(ChatTab);
-      port.postMessage({thaotac: "show"});//
-      // port.onMessage.addListener(function(msg) {
-      // });
+  ChatTabs = document.querySelectorAll('[data-pagelet="ChatTab"]');
+  ChatTabs = [...ChatTabs];
+  array_ChatTabName = [];
+  if(ChatTabs !== "[]"){
+    ChatTabs.forEach(element => {
+      var ChatTabNames = element.querySelectorAll('[data-testid="messenger-chat-title-text"]');
+      ChatTabNames = [...ChatTabNames];
+      array_ChatTabName.push(ChatTabNames[0].textContent);//FIXME: trường hợp 2 tên giống nhau
+      //console.log(ChatTabNames[0].textContent)
+      element.addEventListener('mouseenter', () => {//FIXME: check ton tai addEventListener
+        port.postMessage({thaotac: "show"});
+      });
+      element.addEventListener('mouseleave', () => {
+        port.postMessage({thaotac: "hide"});
+      });
     });
-    element.addEventListener('mouseleave', e => {
-      var ChatTab = element.querySelector('[data-testid="messenger-chat-title-text"]');
-      port.postMessage({thaotac: "hide"});//
-      // port.onMessage.addListener(function(msg) {
-      // });
-    });
+    //console.log(array_ChatTabName)
+    port.postMessage({ChatTabName: JSON.stringify(array_ChatTabName)});
+    localStorage.setItem('Chat_Tabs', JSON.stringify(array_ChatTabName));
   }
 }
 

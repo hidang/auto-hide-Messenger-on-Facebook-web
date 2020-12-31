@@ -3,25 +3,17 @@
 //[data-testid="mwchat_outgoing_row"]
 console.log('show_hide.js');
 
-chrome.storage.local.get(["thaotac", "nameChatTab"], function(items) {
-  var nameChatTab = (items["nameChatTab"] || "");
+chrome.storage.local.get(["thaotac"], function(items) {
   var thaotac = (items["thaotac"] || "");
-  Show_Hide(thaotac, nameChatTab);
+  Show_Hide(thaotac);
 });
-function Show_Hide(thaotac, nameChatTab){
-  console.log(nameChatTab);
-  // if (chattab ==="") 
-  //   var elements = document.querySelectorAll('[data-testid="incoming_group"');//sender
-  // else
-  //   var elements = chattab.querySelectorAll('[data-testid="incoming_group"');//sender
+function Show_Hide(thaotac){
+
+  
   var elements = document.querySelectorAll('[data-testid="incoming_group"');//sender
   for (let element of elements) 
     element.style.visibility = thaotac;
-  
-  // if (chattab ==="")
-  //   var elements = document.querySelectorAll('[data-testid="outgoing_group"');//me
-  // else
-  //   var elements = chattab.querySelectorAll('[data-testid="outgoing_group"');//me
+
   var elements = document.querySelectorAll('[data-testid="outgoing_group"');
   for (let element of elements) 
     element.style.visibility = thaotac;
