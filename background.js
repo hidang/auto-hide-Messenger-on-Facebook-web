@@ -4,6 +4,9 @@ chrome.runtime.onConnect.addListener(function(port) {
   //console.assert(port.name == "user_addEventMouse");
   port.onMessage.addListener(function(msg) { 
     //console.log(msg.nameChatTab)
+    if(msg.ChatTabName){
+      localStorage.setItem('ChatTabName', msg.ChatTabName);
+    }
     switch (msg.thaotac) {
       case 'show':{
         chrome.storage.local.set({
@@ -24,9 +27,6 @@ chrome.runtime.onConnect.addListener(function(port) {
         break;
       }
       default: break;
-    }
-    if(msg.ChatTabName){
-      localStorage.setItem('ChatTabName', msg.ChatTabName);
     }
   });
 });
